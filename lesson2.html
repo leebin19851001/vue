@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        {{ name }}
+        {{ desc }}
+
+
+    </div>
+
+    <script>
+        // 插值表达式
+        // 使用的数据，必须在data中存在
+        // 数据需要先存在，才能实现数据绑定
+
+        // 通过索引的方式改变数组，不能渲染视图
+        // 通过改变数组长度的方式改变数组，不能渲染视图
+        // 数组变异方法： push, pop, shift, unshift, sort, reverse, splice
+
+        // $set   vm.$set(vm.obj, 'xxx', 99);
+        // $el   获取挂在元素
+        // $nextTick(function(){})  页面渲染完成后会触发;
+        // $mount()  挂载
+          
+
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'shanshan',
+                desc: 'zuimei'
+            }
+        });
+    </script>
+</body>
+</html>
