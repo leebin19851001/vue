@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>为什么要使用vue</title>
+</head>
+
+<body>
+
+    <ul id="container"></ul>
+    <button id="button">更改职业</button>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        // 为什么要使用vue
+        // 1.性能更好
+        // 2.视图数据分离
+        // 3.维护成本低 
+
+
+        // 为什么操作dom非常昂贵
+        // 1.js和dom是两种东西，每次连接都需要消耗性能
+        // 2.操作dom会导致重排和重绘
+
+
+        // 为什么使用veu的性能会更好
+        // vue的核心是虚拟dom，使用虚拟dom可以减少dom操作，从而提升应用的性能
+
+
+        // 什么是虚拟dom
+        // 虚拟dom：virtual dom（也被称为vdom）
+        // 所谓虚拟dom，即为伪dom，假的dom，它不是一个真实的dom，而是由js来模拟出来的具有真实dom结构的一个树行结构
+
+
+        // 为什么要用js来模拟dom结构：
+        // 1.只有js是编程语言，可以做到循环，判断、递归等各种逻辑，实现算法；
+        // 2.dom的操作是昂贵的，js的运行效率更高，将dom对比放在js层，减少dom操作，效率更高
+
+
+
+        const $container = $('#container');
+        const $button = $('#button');
+        const dataList = [
+            {
+                name: 'shan',
+                age: 18,
+                profession: '讲师'
+            },
+            {
+                name: 'jc',
+                age: 22,
+                profession: '自称华宇最帅男讲师'
+            },
+            {
+                name: 'cst',
+                age: 20,
+                profession: '从前是高瘦帅，现在是胖讲师'
+            },
+            {
+                name: 'dxm',
+                age: 88,
+                profession: '渡一教具，哪儿都有他'
+            }
+        ]
+
+        function getData(dataList) {
+            let liStr = '';
+            dataList.forEach(item => {
+                liStr += `<li>
+                            <span>${item.name}</span>
+                            <span>${item.age}</span>
+                            <span>${item.profession}</span>
+                       </li>`;
+            });
+
+            $container.html(liStr);
+        }
+        getData(dataList);
+
+        $button.on('click', () => {
+            dataList[0].profession = '一定是宇宙最美讲师';
+            dataList[1].profession = '我是谁';
+            dataList[2].profession = '我在哪儿';
+            dataList[3].profession = 'ZZZZZZZ';
+            getData(dataList);
+        })
+    </script>
+</body>
+
+</html>
