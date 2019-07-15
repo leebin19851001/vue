@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <!-- v-model   双向数据绑定  value + input  语法糖 -->
+    <!-- 可以实现双向绑定的控件类型：input text textarea checkBox radio -->
+    <!-- select -->
+    <div id="app">
+        <!-- <input type="text" v-model:value="content">
+        <span> {{ content}}</span> -->
+
+        <select v-model="selected">
+            <option value="" disabled>请选择</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <span>{{ selected }}</span>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                content: "shanshan",
+                selected:''
+            }
+        });
+    </script>
+</body>
+</html>
