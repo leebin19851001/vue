@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" v-slice:9,10,11.number.string="content" v-model="content">
+        <input type="text" v-slice:7.number="content">
         {{ content }}
     </div>
 
@@ -22,15 +22,44 @@
         //     vnode.context.content = val;
         // });
 
-
+        //全局
         Vue.directive('slice', {
+            //只执行一次，绑定时执行
             bind (el, bingings, vnode) {
-                var val = bingings.value.slice(0, 5);
-                vnode.context.content = val;
+                const context = vnode.context;
+                const length = bingings.arg || 5;
+                const numberFlag = bingings.modifiers.number;
+                let initVal = context[bingings.expression];
+                if(numberFlag) {
+                    initVal = initVal.replace(/[^0-9]/g, '');
+                }
+                initVal = initVal.slice(0,length);
+                el.value = initVal;
+                context[bingings.expression] = initVal;
+                el.oninput = e => {
+                    let value = e.target.value;
+                    if(numberFlag) {
+                        value = value.replace(/[^0-9]/g, '');
+                    }
+                    let val = value.slice(0, length);
+                    el.value = val;
+                    context[bingings.expression] = val;
+                }
             },
+            //更新时执行
             update (el, bingings, vnode) {
-                var val = bingings.value.slice(0, 5);
-                vnode.context.content = val;
+                let context = vnode.context;
+                const numberFlag = bingings.modifiers.number;
+                let value = context[bingings.expression];
+                if (numberFlag) {
+                    value = value.replace(/[^0-9]/g, '');
+                }
+                el.value = value;
+                context[bingings.expression] = value;
+
+            },
+            inserted (el, bingings, vnode) {
+                el.focus();
             }
         })
 
@@ -38,7 +67,7 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                content: ''
+                content: 'd31313aadfadsfa'
             }
         });
 

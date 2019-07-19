@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fliter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ money | formatMoney }}
+
+    </div>
+
+    <script>
+        //全局过滤器:不改变原始数值
+        Vue.filter('formatMoney', value => {
+            return value.toLocaleString();
+        });
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                a: 10,
+                money: 1000000
+            },
+            //局部
+            filters: {
+
+            }
+        });
+    </script>
+</body>
+</html>
