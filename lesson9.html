@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性和侦听器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 姓名： {{ name }}   年龄： {{ age }} -->
+
+        {{ person }}
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data : {
+                //在data中this指向window    window.name = ''  空串
+                name: 'xixi',
+                age : 3,
+                person: ''
+            },
+            methods: {
+                // person () {
+                //     console.log('methods');
+                //     return `姓名： ${this.name}, 年龄： ${this.age}`;
+                // }
+            },
+            computed: {
+                // person () {
+                //     console.log('methods');
+                //     return `姓名： ${this.name}, 年龄： ${this.age}`;
+                // }
+            },
+            //侦听器
+            watch: {
+                //函数方式
+                // name (newValue) {
+                //     this.person = `姓名： ${this.name}, 年龄： ${this.age}`
+                // },
+                // age (newValue) {
+                //     this.person = `姓名： ${this.name}, 年龄： ${this.age}`
+                // }
+
+                //对象方式
+                name : {
+                    handler (newValue) {
+                        this.person = `姓名： ${this.name}, 年龄： ${this.age}`
+                    },
+                    immediate: true
+                },
+                age: {
+                    handler (newValue) {
+                        this.person = `姓名： ${this.name}, 年龄： ${this.age}` 
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
