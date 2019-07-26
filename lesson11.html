@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>组件间通信1</title>
+</head>
+<body>
+    <!-- 父->子  传值的三种方式
+    1.props  注册属性传值（推荐）  $attrs   inheritAttrs
+    2.在vm.created生命周期函数中使用vm.$parent、vm.$childred
+    3.使用provide和inject -->
+    <div id="app">
+        <my-content :title='title' :content='content'></my-content>
+    </div>
+        
+    <script>
+       const vm = new Vue({
+           el: '#app',
+           data: {
+               content:'我是内容。。。。。。。。。。。。。。',
+               title: '我是标题。。。'
+           },
+           components: {
+                myContent: {
+                    props: ['title'],
+                    inheritAttrs: false,
+                    template: `<div>
+                                    <h3>{{ title }}</h3>
+                                    <my-p :content=$attrs.content></my-p>
+                                </div>`,
+                                components: {
+                    myP: {
+                        props: ['content'],
+                        template: `<p>{{ content }}</p>`
+                    }
+                }
+                } 
+           }
+       }); 
+    </script>
+</body>
+</html>
